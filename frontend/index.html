@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSmart AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYwJcYcuX62Wgs3--zv8Nmro85WnsZ9yw&callback=initMap" async
+        defer></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="brand"><i class="fa-solid fa-bolt"></i> ShopSmart <span class="aitag">AI</span></div>
+        <div class="navr">
+            <span class="st" id="mlSt"><span class="dot"></span> Loading</span>
+            <button class="cbtn" onclick="toggleCart()" id="cartToggle"><i class="fa-solid fa-cart-shopping"></i><span
+                    class="badge" id="cartBadge">0</span></button>
+        </div>
+    </nav>
+
+    <div class="wrap">
+
+        <!-- ── LEFT PANEL ── -->
+        <div class="left" id="leftPanel">
+
+            <div class="sec searchSec">
+                <h2><i class="fa-solid fa-magnifying-glass"></i> Search Products</h2>
+                <div class="sinput">
+                    <input id="si" placeholder="Add product (milk, wire, bread...)" autocomplete="off">
+                    <button onclick="addProd()"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="chips" id="chips"></div>
+                <div class="qtags">
+                    <span onclick="qAdd('milk')">🥛milk</span><span onclick="qAdd('bread')">🍞bread</span>
+                    <span onclick="qAdd('rice')">🍚rice</span><span onclick="qAdd('wire')">💡wire</span>
+                    <span onclick="qAdd('paracetamol')">💊paracetamol</span><span
+                        onclick="qAdd('hammer')">🔨hammer</span>
+                    <span onclick="qAdd('charger')">📱charger</span><span onclick="qAdd('pen')">📝pen</span>
+                    <span onclick="qAdd('tomato')">🍅tomato</span><span onclick="qAdd('cake')">🎂cake</span>
+                </div>
+                <button class="fbtn" id="fbtn" onclick="doSearch()" disabled><i class="fa-solid fa-brain"></i> Find Best
+                    Shops</button>
+            </div>
+
+            <div class="loc">
+                <i class="fa-solid fa-location-dot" style="color:#ef4444"></i>
+                <span id="locTx">Delhi (28.6139, 77.2090)</span>
+                <button onclick="getLoc()"><i class="fa-solid fa-crosshairs"></i> Detect</button>
+            </div>
+
+            <!-- ML -->
+            <div id="mlBox" class="mlbox" style="display:none"></div>
+
+            <!-- Loader -->
+            <div id="loader" class="ldr" style="display:none">
+                <div class="lspin">🧠</div>
+                <p>Finding best shops...</p>
+            </div>
+
+            <!-- Results -->
+            <div id="resSec" style="display:none">
+                <div class="reshead">
+                    <h3 id="resTitle"></h3>
+                </div>
+                <div id="shopCards"></div>
+            </div>
+
+            <!-- Compare -->
+            <div id="cmpSec" class="cmpsec" style="display:none">
+                <div class="cmphead">
+                    <h3><i class="fa-solid fa-scale-balanced"></i> Compare: <span id="cmpProd"></span></h3>
+                    <button onclick="closeCmp()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div id="cmpBody"></div>
+            </div>
+
+            <div id="empty" class="emptybox" style="display:none"><span>🔍</span>
+                <h4>No shops found</h4>
+                <p id="emptyMsg"></p>
+            </div>
+        </div>
+
+        <!-- ── RIGHT PANEL (MAP) ── -->
+        <div class="right">
+            <div class="mhead">
+                <h4><i class="fa-solid fa-map-location-dot"></i> Nearby Shops</h4><span class="minfo" id="minfo"></span>
+            </div>
+            <div id="gmap"></div>
+        </div>
+    </div>
+
+    <!-- CART -->
+    <div class="cartpanel" id="cartPanel">
+        <div class="chead">
+            <h3><i class="fa-solid fa-cart-shopping"></i> Cart</h3><button onclick="toggleCart()"><i
+                    class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="citems" id="citems"></div>
+        <div class="cfoot" id="cfoot" style="display:none">
+            <div class="ctotal">Total: <b id="ctotal">₹0</b></div>
+            <input id="oName" placeholder="Your name"><input id="oPhone" placeholder="Phone"><input id="oAddr"
+                placeholder="Delivery address">
+            <button class="obtn" onclick="placeOrder()"><i class="fa-solid fa-check-circle"></i> Place Order</button>
+        </div>
+    </div>
+
+    <!-- ORDER MODAL -->
+    <div class="modalbg" id="orderModal">
+        <div class="modalbox">
+            <div id="orderBody"></div><button class="closem"
+                onclick="document.getElementById('orderModal').classList.remove('on')">Done</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <script src="app.js"></script>
+</body>
+
+</html>
