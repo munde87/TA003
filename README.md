@@ -1,4 +1,4 @@
-# 🛍️ ShopMart3 — Smart Nearby Shop Locator with ML Ranking
+# 🛍️ NearU — Smart Nearby Shop Locator with ML Ranking
 
 ## 📌 Project Overview
 
@@ -74,7 +74,7 @@ Higher score = Better recommendation
 ## 🏗️ Project Structure
 
 ```
-SHOPMART3
+NearU
 │
 ├── frontend
 │   ├── index.html
